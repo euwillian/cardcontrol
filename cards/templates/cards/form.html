@@ -1,0 +1,70 @@
+{% extends "app/base.html" %}
+
+{% block title %}Formulário de Gasto{% endblock %}
+
+{% block content %}
+<style>
+  body {
+    font-size: 0.9rem;
+  }
+
+  input, select, textarea {
+    background-color: #343a40 !important;
+    color: #fff !important;
+    border: 1px solid #495057 !important;
+    font-size: 0.9rem !important;
+    padding: 0.25rem 0.5rem !important;
+  }
+
+  label {
+    color: #ccc;
+    font-size: 0.85rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .form-control {
+    padding: 0.3rem 0.5rem;
+  }
+
+  .form-group {
+    margin-bottom: 0.6rem;
+  }
+
+  p {
+    margin-bottom: 0.4rem;
+  }
+
+  .card-header h4 {
+    font-size: 1.1rem;
+  }
+</style>
+
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-6">
+
+      <div class="card bg-secondary-subtle shadow-sm">
+        <div class="card-header bg-primary text-white py-2">
+          <h4 class="mb-0">Registrar Gasto</h4>
+        </div>
+
+        <div class="card-body py-3 px-3">
+          <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <div class="d-grid mt-2">
+              <button type="submit" class="btn btn-success btn-sm">Salvar</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="card-footer text-end py-2 px-3">
+          <a href="{% url 'lista_gastos' %}" class="btn btn-outline-light btn-sm">Voltar</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

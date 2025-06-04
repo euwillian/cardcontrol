@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br" data-bs-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <title>Registrar Usuário</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    input, select, textarea {
+      background-color: #343a40 !important;
+      color: #fff !important;
+      border: 1px solid #495057 !important;
+      padding: 0.4rem 0.75rem !important;
+      font-size: 0.875rem;
+      border-radius: 0.5rem !important;
+    }
+    input:focus, select:focus, textarea:focus {
+      background-color: #495057 !important;
+      color: #fff !important;
+    }
+    label {
+      color: #ccc;
+      font-size: 0.85rem;
+      margin-bottom: 0.25rem;
+      display: block;
+    }
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    .card {
+      border-radius: 1rem;
+    }
+    .btn {
+      border-radius: 0.5rem;
+    }
+  </style>
+</head>
+<body class="bg-dark text-light">
+
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-5">
+
+        <div class="card bg-secondary-subtle shadow-lg">
+          <div class="card-header bg-primary text-white py-2 rounded-top">
+            <h5 class="mb-0">Registrar Novo Usuário</h5>
+          </div>
+
+          <div class="card-body px-4 py-4">
+            <form method="POST">
+              {% csrf_token %}
+
+              <div class="form-group">
+                <label for="{{ user_form.username.id_for_label }}">Nome de usuário:</label>
+                {{ user_form.username }}
+                {% if user_form.username.errors %}
+                  <div class="text-danger small">{{ user_form.username.errors }}</div>
+                {% endif %}
+              </div>
+
+              <div class="form-group">
+                <label for="{{ user_form.password1.id_for_label }}">Senha:</label>
+                {{ user_form.password1 }}
+                {% if user_form.password1.errors %}
+                  <div class="text-danger small">{{ user_form.password1.errors }}</div>
+                {% endif %}
+              </div>
+
+              <div class="form-group">
+                <label for="{{ user_form.password2.id_for_label }}">Confirme a senha:</label>
+                {{ user_form.password2 }}
+                {% if user_form.password2.errors %}
+                  <div class="text-danger small">{{ user_form.password2.errors }}</div>
+                {% endif %}
+              </div>
+
+              <div class="d-grid mt-4">
+                <button type="submit" class="btn btn-success btn-sm">Registrar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

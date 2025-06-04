@@ -1,0 +1,49 @@
+{% extends "app/base.html" %}
+
+{% block title %}Lista de Gastos{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4 text-center">Gastos Registrados</h1>
+
+    <div class="d-flex justify-content-end mb-3">   
+        <a href="{% url 'nova_pessoa' %}" class="btn btn-outline-info me-2">Cadastrar Pessoa</a>
+        <a href="{% url 'novo_cartao' %}" class="btn btn-outline-info me-2">Cadastrar Cartão</a>
+        <a href="{% url 'novo_gasto' %}" class="btn btn-outline-info me-2">Cadastrar Gasto</a>
+        <a href="{% url 'relatorio_gastos' %}" class="btn btn-outline-info me-2">Relatório</a>
+        <a href="{% url 'novo_gasto' %}" class="btn btn-success">+ Adicionar Gasto</a>
+    </div>
+
+    <div class="card shadow bg-secondary-subtle">
+        <div class="card-body p-0">
+            <table class="table table-dark table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Valor</th>
+                        <th>Descrição</th>
+                        <th>Quem Gastou</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for gasto in gastos %}
+                        <tr>
+                            <td>{{ gasto.data_do_gasto|date:"d/m/Y" }}</td>
+                            <td>R${{ gasto.valor_total|floatformat:2 }}</td>
+                            <td>{{ gasto.descricao }}</td>
+                            <td>{{ gasto.quem_gastou }}</td>
+                            <td>
+                                <a href="{% url 'editar_gasto' gasto.id %}" class="btn btn-sm btn-secondary">Editar</a>
+                                <a href="{% url 'excluir_gasto' gasto.id %}" class="btn btn-sm btn-secondary">Excluir</a>
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="5" class="text-center text-muted">Nenhum gasto registrado.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
