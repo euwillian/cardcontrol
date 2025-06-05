@@ -3,12 +3,12 @@ from .models import Gasto, Pessoa, Cartao
 from .forms import GastoForm, PessoaForm, CartaoForm
 from dateutil.relativedelta import relativedelta
 from django.db.models import Sum
+from django.utils import timezone
 
 # para gerar pdf
 from django.template.loader import get_template
 from django.http import HttpResponse
 from xhtml2pdf import pisa
-import tempfile
 
 
 
@@ -163,7 +163,7 @@ def criar_cartao(request):
             form.usuario = request.user
             form.save()
 
-            return redirect('dashboard')
+            return redirect('lista_gastos')
     else:
         form = PessoaForm(usuario=request.user)
 
@@ -191,7 +191,7 @@ def relatorio_por_mes_e_pessoa(request):
     # somar o valor_total para mostrar quanto a pessoa deve no período
     total = gastos.aggregate(total=Sum('valor_total'))['total'] or 0
 
-    pessoas = Pessoa.objects.all()  # para popular o select de pessoas no filtro
+    pessoas = Pessoa.objects.filter(usuario=request.user)  # para popular o select de pessoas no filtro
 
     contexto = {
         'gastos': gastos,

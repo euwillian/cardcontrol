@@ -5,7 +5,7 @@ class GastoForm(forms.ModelForm):
     class Meta:
     # nome do modelo no banco de dados
         model = Gasto
-        fields = ['cartao', 'data_do_gasto', 'valor_total', 'qtd_parcelas', 'descricao', 'categoria', 'quem_gastou']
+        fields = ['cartao', 'data_do_gasto', 'valor_total', 'qtd_parcelas', 'descricao', 'quem_gastou']
         
         widgets = {
             'cartao': forms.Select(attrs={'class': 'form-select'}),
@@ -13,7 +13,6 @@ class GastoForm(forms.ModelForm):
             'valor_total': forms.NumberInput(attrs={'class': 'form-control'}),
             'qtd_parcelas': forms.NumberInput(attrs={'class': 'form-control'}),
             'descricao': forms.TextInput(attrs={'class': 'form-control'}),
-            'categoria': forms.Select(attrs={'class': 'form-select'}),
             'quem_gastou': forms.Select(attrs={'class': 'form-select'}),
         }
         

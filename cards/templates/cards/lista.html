@@ -8,13 +8,50 @@
     <div class="d-flex justify-content-end mb-3">   
         <a href="{% url 'nova_pessoa' %}" class="btn btn-outline-info me-2">Cadastrar Pessoa</a>
         <a href="{% url 'novo_cartao' %}" class="btn btn-outline-info me-2">Cadastrar Cartão</a>
-        <a href="{% url 'novo_gasto' %}" class="btn btn-outline-info me-2">Cadastrar Gasto</a>
         <a href="{% url 'relatorio_gastos' %}" class="btn btn-outline-info me-2">Relatório</a>
         <a href="{% url 'novo_gasto' %}" class="btn btn-success">+ Adicionar Gasto</a>
     </div>
 
     <div class="card shadow bg-secondary-subtle">
         <div class="card-body p-0">
+            <form method="get" class="row g-2 mb-3">
+    <div class="col-md-3">
+        <select name="pessoa" class="form-select">
+            <option value="">Quem Gastou</option>
+            {% for pessoa in pessoas %}
+                <option value="{{ pessoa.id }}" {% if pessoa_id == pessoa.id|stringformat:"s" %}selected{% endif %}>
+                    {{ pessoa.nome }}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="col-md-3">
+        <select name="cartao" class="form-select">
+            <option value="">Cartão</option>
+            {% for cartao in cartoes %}
+                <option value="{{ cartao.id }}" {% if cartao_id == cartao.id|stringformat:"s" %}selected{% endif %}>
+                    {{ cartao.nome }}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="col-md-2">
+        <input type="date" name="data_inicial" class="form-control" value="{{ data_inicial }}">
+    </div>
+
+    <div class="col-md-2">
+        <input type="date" name="data_final" class="form-control" value="{{ data_final }}">
+    </div>
+
+<div class="col-md-2 d-flex gap-2">
+    <button type="submit" class="btn btn-primary w-50">Filtrar</button>
+    <a href="{% url 'lista_gastos' %}" class="btn btn-outline-secondary w-50">Limpar</a>
+</div>
+
+</form>
+
             <table class="table table-dark table-hover mb-0">
                 <thead>
                     <tr>

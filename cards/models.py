@@ -22,19 +22,7 @@ class Gasto(models.Model):
     data_do_gasto = models.DateField(blank=False, null=False)
     valor_total = models.DecimalField(max_digits=10, decimal_places=2, blank=False, null=False)
     qtd_parcelas = models.IntegerField(blank=False, null=False)
-    descricao = models.CharField(max_length=30, blank=False, null=False)
-    CATEGORIAS_CHOICES = [
-        ('despesas_fixas', 'Despesas Fixas'),
-        ('despesas_variaveis', 'Despesas Variáveis'),
-        ('alimentacao', 'Alimentação'),
-        ('educacao', 'Educação'),
-        ('assinatura', 'Assinatura'),
-        ('lazer', 'Lazer'),
-        ('relacionamento', 'Relacionamento'),
-        ('manutencao', 'Manutenção'),
-        ('financeiro', 'Financeiro'),
-    ]
-    categoria = models.CharField(max_length=20, default='outros', choices=CATEGORIAS_CHOICES)
+    descricao = models.CharField(max_length=100, blank=False, null=False)
     quem_gastou = models.ForeignKey(Pessoa, on_delete=models.CASCADE, related_name='fk_nome_pessoa')
     usuario = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
     criado_em = models.DateTimeField(auto_now_add=True, null=False)   # campo de controle de quando foi inserido o registro
